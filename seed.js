@@ -21,7 +21,7 @@ const Item = require('./models/item');
   await Item.deleteMany({});
   const items = await Item.create([
     {name: 'Hamburger', emoji: '🍔', category: categories[0], price: 595},
-    {name: 'Turkey Sandwich', emoji: '🥪', category: categories[0], price: 6.95},
+    {name: 'Turkey Sandwich', emoji: '🥪', category: categories[0], price: 695},
     {name: 'Hot Dog', emoji: '🌭', category: categories[0], price: 395},
     {name: 'Crab Plate', emoji: '🦀', category: categories[1], price: 1495},
     {name: 'Fried Shrimp', emoji: '🍤', category: categories[1], price: 1395},
