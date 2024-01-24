@@ -32,7 +32,7 @@ async function createCheckoutSession(req, res) {
             success_url: `${process.env.SERVER_URL}/order/new`,
             cancel_url: `${process.env.SERVER_URL}/order`
         })
-        res.redirect(303, session.url);
+        res.json({ url: session.url })
     } catch (err) {
         console.log('ERROR OBJECT', err)
         res.status(500).json({ error: err.message})
