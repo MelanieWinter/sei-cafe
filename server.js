@@ -2,6 +2,9 @@ const express = require('express');
 const path = require('path');
 const favicon = require('serve-favicon');
 const logger = require('morgan');
+const cors = require('cors');
+
+
 // Always require and configure near the top
 require('dotenv').config();
 // Connect to the database
@@ -11,6 +14,12 @@ const app = express();
 
 app.use(logger('dev'));
 app.use(express.json());
+
+app.use(
+  cors({
+    origin: "http://localhost:3000"
+  })
+)
 
 // Configure both serve-favicon & static middleware
 // to serve from the production 'build' folder
@@ -26,11 +35,13 @@ const port = process.env.PORT || 3001;
 // Put API routes here, before the "catch all" route
 app.use('/api/users', require('./routes/api/users'));
 
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY)
+
 // Protect all routes below from anonymous users
 const ensureLoggedIn = require('./config/ensureLoggedIn');
 app.use('/api/items', ensureLoggedIn, require('./routes/api/items'));
 app.use('/api/orders', ensureLoggedIn, require('./routes/api/orders'));
-
+app.use('/api/stripe', ensureLoggedIn, require('./routes/api/stripe'));
 
 // The following "catch all" route (note the *) is necessary
 // to return the index.html on all non-AJAX/API requests

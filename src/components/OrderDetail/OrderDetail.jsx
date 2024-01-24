@@ -1,5 +1,6 @@
 import './OrderDetail.css';
 import LineItem from '../LineItem/LineItem';
+import * as stripeApi from '../../utilities/stripe.api'
 
 // Used to display the details of any order, including the cart (unpaid order)
 export default function OrderDetail({ order, handleChangeQty, handleCheckout }) {
@@ -34,7 +35,8 @@ export default function OrderDetail({ order, handleChangeQty, handleCheckout }) 
                 :
                 <button
                   className="btn-sm"
-                  onClick={handleCheckout}
+                  // onClick={handleCheckout}
+                  onClick={() => stripeApi.handleCheckoutButton(order.lineItems)}
                   disabled={!lineItems.length}
                 >CHECKOUT</button>
               }
