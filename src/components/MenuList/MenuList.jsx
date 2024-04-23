@@ -13,5 +13,5 @@ export default function MenuList({ menuItems, handleAddToOrder }) {
     <main className="MenuList">
       {items}
     </main>
-  );
+  )
 }
